@@ -31,16 +31,16 @@ struct task_info {
 
 #define _TASK_INIT(_n, _prio, _sched_name, _affinity) \
     [_n] = {\
-        .entry = test_task_##_n, \
+        .entry = test_task__##_n, \
         .thread = 0, \
         .scheduler_name = _sched_name, \
         .priority = _prio, \
-        .cpu_affinity = _affinity
+        .cpu_affinity = _affinity \
     }
 
 
 #define TASK_DEFINE(_n) \
-    static rtems_task test_task_##_n(rtems_task_argument arg) \
+    static rtems_task test_task__##_n(rtems_task_argument arg) \
     { \
         for ( ; ; ) { \
             printf("Core_%u: T" #_n "\n", rtems_scheduler_get_processor()); \
@@ -48,18 +48,26 @@ struct task_info {
         } \
     }
 
+TASK_DEFINE(0);
+TASK_DEFINE(1);
+TASK_DEFINE(2);
+TASK_DEFINE(3);
+TASK_DEFINE(4);
+TASK_DEFINE(5);
+TASK_DEFINE(6);
+TASK_DEFINE(7);
+TASK_DEFINE(8);
 
 static struct task_info _task_table[] = {
-    _TASK_INIT(0, 100, 0, 0, 0),
-    _TASK_INIT(1, 100, 0, 0, 0),
-    _TASK_INIT(2, 100, 0, 0, 0),
-    _TASK_INIT(3, 100, 0, 0, 0),
-    _TASK_INIT(4, 100, 0, 0, 0),
-    _TASK_INIT(5, 100, 0, 0, 0),
-    _TASK_INIT(6, 100, 0, 0, 0),
-    _TASK_INIT(7, 100, 0, 0, 0),
-    _TASK_INIT(8, 100, 0, 0, 0),
-    _TASK_INIT(9, 100, 0, 0, 0),
+    _TASK_INIT(0, 100, 0, 0),
+    _TASK_INIT(1, 100, 0, 0),
+    _TASK_INIT(2, 100, 0, 0),
+    _TASK_INIT(3, 100, 0, 0),
+    _TASK_INIT(4, 100, 0, 0),
+    _TASK_INIT(5, 100, 0, 0),
+    _TASK_INIT(6, 100, 0, 0),
+    _TASK_INIT(7, 100, 0, 0),
+    _TASK_INIT(8, 100, 0, 0),
 
 };
 
